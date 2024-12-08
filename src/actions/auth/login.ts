@@ -19,7 +19,6 @@ export const login = async (
   values: z.infer<typeof LoginSchema>,
   callbackUrl?: string | null
 ) => {
-  console.log(callbackUrl);
   try {
     const validatedFields = LoginSchema.safeParse(values);
     if (!validatedFields.success) {
