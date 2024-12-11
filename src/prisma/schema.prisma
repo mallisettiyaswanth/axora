@@ -35,8 +35,16 @@ model User {
   image                 String?
   accounts              Account[]
   password              String?
+  createdAt             DateTime               @default(now())
   isTwoFactorEnabled    Boolean                @default(false)
   TwoFactorConfirmation TwoFactorConfirmation?
+  isInstagramConnected  Boolean                @default(false)
+  InstagramProfiles     InstagramProfile?
+  isFacebookConnected   Boolean                @default(false)
+  FacebookProfiles      FacebookProfile?
+  Subscription          Subscription?
+  automations           Automation[]
+  integrations          Integration[]
 
   @@map("users")
 }
@@ -76,4 +84,143 @@ model TwoFactorConfirmation {
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("twofactortokens")
+}
+
+model InstagramProfile {
+  id String @id @default(uuid())
+
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @default(now())
+
+  @@map("instagramprofile")
+}
+
+model FacebookProfile {
+  id String @id @default(uuid())
+
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @default(now())
+
+  @@map("facebookprofile")
+}
+
+model Subscription {
+  id         String            @id @default(uuid())
+  User       User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String?           @unique
+  createdAt  DateTime          @default(now())
+  plan       SUBSCRIPTION_PLAN @default(FREE)
+  updatedAt  DateTime          @default(now())
+  customerId String?           @unique
+
+  @@map("subscription")
+}
+
+model Integration {
+  id          String       @id @default(uuid())
+  name        INTEGRATIONS @default(INSTAGRAM)
+  createdAt   DateTime     @default(now())
+  User        User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String?      @unique
+  token       String       @unique
+  expiresAt   DateTime?
+  instagramId String?      @unique
+
+  @@map("integration")
+}
+
+model Automation {
+  id        String    @id @default(uuid())
+  name      String    @default("Untitled")
+  createdAt DateTime  @default(now())
+  active    Boolean   @default(false)
+  trigger   Trigger[]
+  listener  Listener?
+  posts     Post[]
+  dms       Dms[]
+  User      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?   @unique
+  keywords  Keyword[]
+
+  @@map("automation")
+}
+
+model Dms {
+  id           String      @id @default(uuid())
+  Automation   Automation? @relation(fields: [automationId], references: [id])
+  automationId String?     @unique
+  createdAt    DateTime    @default(now())
+  senderId     String?
+  reciever     String?
+  message      String?
+
+  @@map("dms")
+}
+
+model Post {
+  id           String      @id @default(uuid())
+  postid       String
+  caption      String?
+  media        String
+  mediaType    MEDIATYPE   @default(IMAGE)
+  Automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String?     @unique
+
+  @@map("post")
+}
+
+model Listener {
+  id           String     @id @default(uuid())
+  Automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String     @unique
+  listener     LISTENERS  @default(MESSAGE)
+  prompt       String
+  commentReply String?
+  dmCount      Int        @default(0)
+  commentCount Int        @default(0)
+
+  @@map("listner")
+}
+
+model Trigger {
+  id           String      @id @default(uuid())
+  type         String
+  Automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String?     @unique
+
+  @@map("trigger")
+}
+
+model Keyword {
+  id           String      @id @default(uuid())
+  word         String
+  Automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String?     @unique
+
+  @@unique([automationId, word])
+  @@map("keyword")
+}
+
+enum SUBSCRIPTION_PLAN {
+  PRO
+  FREE
+}
+
+enum INTEGRATIONS {
+  INSTAGRAM
+}
+
+enum MEDIATYPE {
+  IMAGE
+  VIDEO
+  CAROSEL_ALBUM
+}
+
+enum LISTENERS {
+  SMARTAI
+  MESSAGE
 }
