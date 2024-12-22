@@ -41,7 +41,7 @@ const SearchBar = (_props: Props) => {
             <div className="border-none outline-none active:outline-none active:border-none py-1 flex items-center justify-between flex-1 w-full">
               <span className="text-sm text-white/80">Search Automations</span>
               <Badge className="text-sm text-white/80 rounded-full">
-                ctrl + K
+                Ctrl + K
               </Badge>
             </div>
           </DialogTrigger>
