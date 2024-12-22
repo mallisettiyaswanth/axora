@@ -16,6 +16,8 @@ export default auth((req) => {
 
   if (isApiAuthRoute) return;
 
+  console.log("middleware");
+
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFUALT_LOGIN_REDIRECT, nextUrl));

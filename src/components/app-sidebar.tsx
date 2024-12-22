@@ -16,40 +16,51 @@ import { IoLogoInstagram, IoSettingsOutline } from "react-icons/io5";
 import { MdWorkspacesFilled } from "react-icons/md";
 import { SidebarUpgradeIndicator } from "./sidebar-upgrade-indicator";
 import { IoPerson } from "react-icons/io5";
+import { Icons } from "@/lib/constants";
 
 const data = {
   profile: [
     {
       title: "Profile",
       url: "/profile",
-      icon: IoPerson,
+      icon: Icons["profile"],
     },
     {
       title: "Settings",
-      url: "/settings",
-      icon: IoSettingsOutline,
+      url: "/settings/general",
+      icon: Icons["settings"],
     },
   ],
   navigations: [
     {
       title: "Dashboard",
       url: "/dashboard",
-      icon: MdSpaceDashboard,
+      icon: Icons["dashboard"],
     },
     {
       title: "Instagram",
       url: "/instagram",
-      icon: IoLogoInstagram,
+      icon: Icons["instagram"],
+    },
+    {
+      title: "Contacts",
+      url: "/contacts",
+      icon: Icons["contacts"],
     },
     {
       title: "Automations",
       url: "/automations",
-      icon: MdWorkspacesFilled,
+      icon: Icons["automations"],
+    },
+    {
+      title: "Integrations",
+      url: "/integrations",
+      icon: Icons["integrations"],
     },
     {
       title: "Notifications",
       url: "/notifications",
-      icon: MdNotifications,
+      icon: Icons["notifications"],
     },
   ],
 };
@@ -58,7 +69,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
-        <h2 className="w-full items-center justify-center flex text-2xl p-2 tracking-wider font-bold">
+        <h2 className="w-full items-center justify-center flex text-3xl p-2 bg-gradient-to-r from-white via-zinc-300 to-white text-transparent bg-clip-text">
           Axora
         </h2>
       </SidebarHeader>

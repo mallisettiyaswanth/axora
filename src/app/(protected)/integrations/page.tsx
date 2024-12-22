@@ -3,7 +3,7 @@ import React from "react";
 type Props = {};
 
 const Page = (_props: Props) => {
-  return <div className="">dashboard</div>;
+  return <div>Integrations</div>;
 };
 
 export default Page;
