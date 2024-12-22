@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import SessionProviderWrapper from "@/wrappers/SessionProvider";
-import { ThemeProvider } from "@/wrappers/ThemeProvider";
+import ThemeProvider from "@/wrappers/ThemeProvider";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import QueryClientWrapper from "@/wrappers/QueryClientWrapper";
+import { QueryClient } from "@tanstack/react-query";
 
 const geistSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -22,14 +23,14 @@ export default function RootLayout({
   return (
     <SessionProviderWrapper>
       <html lang="en">
-        <body className={`${geistSans.className} antialiased`}>
+        <body className={`${geistSans.className}`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <QueryClientWrapper>{children}</QueryClientWrapper>
           </ThemeProvider>
         </body>
       </html>

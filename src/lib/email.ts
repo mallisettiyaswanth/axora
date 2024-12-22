@@ -16,8 +16,6 @@ export const sendVerificationToken = async (token: string, email: string) => {
        visit to verify
       </a>`,
     });
-
-    console.log("Email sent");
   } catch (err) {
     console.log(err);
   }
@@ -36,8 +34,6 @@ export const sendPasswordResetToken = async (token: string, email: string) => {
        visit to reset
       </a>`,
     });
-
-    console.log("Email sent");
   } catch (err) {
     console.log(err);
   }
@@ -51,7 +47,6 @@ export const sendTwoFactorToken = async (token: string, email: string) => {
       html: token,
     });
 
-    console.log("Email sent");
   } catch (err) {
     console.log(err);
   }

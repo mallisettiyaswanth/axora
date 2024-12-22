@@ -19,7 +19,6 @@ const SearchBar = (_props: Props) => {
       if (e.ctrlKey && e.key.toLocaleLowerCase() === "k") {
         e.stopPropagation();
         e.preventDefault();
-        console.log("key is pressed");
         setSearchModelOpen((prev: boolean): boolean => !prev);
       }
     };

@@ -18,13 +18,13 @@ const General = (props: Props) => {
   const user = useUser();
   const uploadRef = useRef<HTMLInputElement | null>(null);
 
+  if (!user || !user.name) return <> Loading </>;
+
   return (
     <div className="flex h-full w-full flex-col gap-3">
       <SettingsTab
         name="Name"
-        triggerFn={() => {
-          console.log("Trigger");
-        }}
+        triggerFn={() => {}}
         value={<h1>{user?.name}</h1>}
         triggerContent={
           <div className="flex flex-col gap-5">

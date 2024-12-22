@@ -10,7 +10,7 @@ type Props = {};
 
 const Page = (props: Props) => {
   const callbackUrl = useSearchParams().get("callbackUrl");
-  console.log(callbackUrl);
+
   return (
     <div>
       <Button

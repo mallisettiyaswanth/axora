@@ -1,3 +1,6 @@
+"use client";
+
+import useUser from "@/hooks/useUser";
 import React from "react";
 
 type Props = {};

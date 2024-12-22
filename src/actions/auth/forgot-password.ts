@@ -24,7 +24,7 @@ export const forgotPassword = async (email: string) => {
         message: "Reset Email sent.",
       },
     };
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };

@@ -1,8 +1,6 @@
 "use client";
-import { getUserData } from "@/actions/user/user-data";
+
 import { Tabs, TabsList, TabsTrigger } from "@/components/shadcn/tabs";
-import { TabsContent } from "@radix-ui/react-tabs";
-import { useQuery } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
@@ -62,7 +60,7 @@ const Layout = ({ children }: Props) => {
           })}
         </TabsList>
       </Tabs>
-      <div className="flex-1 p-5">{children}</div>
+      {/* <div className="flex-1 p-5">{children}</div> */}
     </div>
   );
 };
