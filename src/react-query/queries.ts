@@ -1,9 +1,17 @@
 import { getUserAutomations } from "@/actions/automations";
-import { useQuery } from "@tanstack/react-query";
+import { getUserData } from "@/actions/user";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export const useQueryAutomations = () => {
   return useQuery({
     queryKey: ["user-automations"],
     queryFn: getUserAutomations,
+  });
+};
+
+export const useQueryUser = () => {
+  return useSuspenseQuery({
+    queryKey: ["user-profile"],
+    queryFn: getUserData,
   });
 };

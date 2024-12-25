@@ -11,9 +11,7 @@ type Props = {};
 const Page = (_props: Props) => {
   const { data, isLoading } = useQueryAutomations();
 
-  const { latestVariable } = useMutationDataState(["create-automation"]);
-
-  console.log(latestVariable);
+  const { latestVariable } = useMutationDataState(["create-automation"]); 
 
   if (isLoading) {
     return (

@@ -6,7 +6,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 type Props = {
   children: React.ReactNode;
 };
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60000,
+    },
+  },
+});
 
 const QueryClientWrapper = async ({ children }: Props) => {
   return (
