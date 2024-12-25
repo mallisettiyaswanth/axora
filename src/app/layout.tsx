@@ -4,7 +4,7 @@ import SessionProviderWrapper from "@/wrappers/SessionProvider";
 import ThemeProvider from "@/wrappers/ThemeProvider";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import QueryClientWrapper from "@/wrappers/QueryClientWrapper";
-import { QueryClient } from "@tanstack/react-query";
+import { Toaster } from "@/components/shadcn/sonner";
 
 const geistSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -27,9 +27,9 @@ export default function RootLayout({
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
-            enableSystem
             disableTransitionOnChange
           >
+            <Toaster />
             <QueryClientWrapper>{children}</QueryClientWrapper>
           </ThemeProvider>
         </body>

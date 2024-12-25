@@ -1,6 +1,13 @@
 import AppLayout from "@/components/Layout/AppLayout";
-import { prefetchUserProfile } from "@/react-query/prefetch";
-import { QueryClient } from "@tanstack/react-query";
+import {
+  prefetchUserAutomations,
+  prefetchUserProfile,
+} from "@/react-query/prefetch";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 
 export default async function Layout({
   children,
@@ -8,7 +15,12 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const client = new QueryClient();
-  const data = await prefetchUserProfile(client);
-  console.log(data);
-  return <AppLayout>{children}</AppLayout>;
+  await prefetchUserProfile(client);
+  await prefetchUserAutomations(client);
+
+  return (
+    <HydrationBoundary state={dehydrate(client)}>
+      <AppLayout>{children}</AppLayout>
+    </HydrationBoundary>
+  );
 }

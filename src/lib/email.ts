@@ -46,7 +46,6 @@ export const sendTwoFactorToken = async (token: string, email: string) => {
       subject: "2FA code",
       html: token,
     });
-
   } catch (err) {
     console.log(err);
   }

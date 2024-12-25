@@ -4,10 +4,11 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/shadcn/sidebar";
 import SearchBar from "@/components/global/main-search";
 import { Button } from "@/components/shadcn/button";
-import { SidebarTrigger } from "@/components/shadcn/sidebar";
 import { Icons } from "@/lib/constants";
+import { SidebarTrigger } from "@/components/shadcn/sidebar";
 import Header from "@/components/global/header";
 import { usePathname } from "next/navigation";
+import CreateAutomation from "@/components/global/create-automation";
 
 type Props = {
   children: React.ReactNode;
@@ -23,9 +24,7 @@ const AppLayout = ({ children }: Props) => {
           <SearchBar />
           <SidebarTrigger className="md:hidden block" />
           <div className="flex gap-3">
-            <Button className="bg-gradient-to-b from-primary to-primary/10 rounded-full">
-              <Icons.automations /> Create Automation
-            </Button>
+            <CreateAutomation />
             <Button className="bg-white rounded-full hover:bg-white/90">
               <Icons.notifications color="red" />
             </Button>
